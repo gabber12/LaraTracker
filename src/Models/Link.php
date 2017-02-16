@@ -1,9 +1,13 @@
 <?php
 
-namespace LaraTracker\Links\Models;
+namespace Laratracker\Links\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Unicodeveloper\Identify\Facades\IdentityFacade as Identify;
+
+use Sinergi\BrowserDetector\Browser;
+use Sinergi\BrowserDetector\Os;
+use Sinergi\BrowserDetector\Device;
+use Sinergi\BrowserDetector\Language;
 
 class Link extends Model
 {
@@ -15,15 +19,17 @@ class Link extends Model
      * @var array
      */
     protected $fillable = [
-        'url', 'slug',
+        'url', 'short_url', 'url_identifier'
     ];
 
     /**
      * Returns the shortered link.
+     *
+     * @return string
      */
     public function shortered()
     {
-        return route('links::redirect', ['slug' => $this->slug]);
+        return route('links::redirect', ['short_url' => $this->short_url]);
     }
 
     /**
@@ -31,11 +37,13 @@ class Link extends Model
      */
     public function views()
     {
-        return $this->hasMany('LaraTracker\\Links\Models\View');
+        return $this->hasMany('LaraTracker\Links\Models\LinkClick');
     }
 
     /**
      * Returns the link unique views.
+     *
+     * @return int
      */
     public function uniqueViews()
     {
@@ -44,156 +52,52 @@ class Link extends Model
 
     /**
      * Returns the link total views number.
+     *
+     * @return int
      */
     public function totalViews()
     {
-        return count($this->views);
+        return $this->views->count();
     }
 
     /**
      * Returns the link total unique views number.
+     * 
+     * @return int
      */
     public function totalUniqueViews()
     {
-        return count($this->uniqueViews());
+        return $this->uniqueViews()->count();
     }
 
-    /**
-     * Returns the link browsers.
-     */
-    public function usedBrowsers()
-    {
-        $results = [];
-
-        foreach ($this->views as $view) {
-            array_key_exists($view->browser, $results) ? $results[$view->browser]++ : $results[$view->browser] = 1;
-        }
-
-        return $results;
-    }
-
-    /**
-     * Returns the link most used browser.
-     */
-    public function mostUsedBrowser()
-    {
-        $max = 0;
-        $max_browser = null;
-
-        foreach ($this->usedBrowsers() as $browser => $count) {
-            if ($count >= $max) {
-                $max = $count;
-                $max_browser = $browser;
-            }
-        }
-
-        return $max_browser;
-    }
-
-    /**
-     * Returns the link OSs (Operating Systems).
-     */
-    public function usedOSs()
-    {
-        $results = [];
-
-        foreach ($this->views as $view) {
-            array_key_exists($view->os, $results) ? $results[$view->os]++ : $results[$view->os] = 1;
-        }
-
-        return $results;
-    }
-
-    /**
-     * Returns the link most used OS (Operating System).
-     */
-    public function mostUsedOS()
-    {
-        $max = 0;
-        $max_os = null;
-
-        foreach ($this->usedOSs() as $os => $count) {
-            if ($count >= $max) {
-                $max = $count;
-                $max_os = $os;
-            }
-        }
-
-        return $max_os;
-    }
-
-    /**
-     * Returns the link OSs (Operating Systems).
-     *
-     * @param bool $fancy
-     */
-    public function usedLanguages($fancy = false)
-    {
-        $collection = collect($this->views->toArray())->groupBy('language')->map(function ($item, $key) {
-            return count($item);
-        });
-
-        if ($fancy) {
-            $collection = $collection->groupBy(function ($item, $key) {
-                $countries = json_decode(file_get_contents(__DIR__.'/../countries.json'), true);
-                foreach ($countries as $country) {
-                    if ($country['code'] == $key) {
-                        return explode(' ', str_replace(';', '', $country['name']))[0];
-                    }
-                }
-
-                return $key;
-            })->map(function ($item, $key) {
-                return count($item);
-            });
-        }
-
-        return $collection->toArray();
-    }
-
-    /**
-     * Returns the link most used OS (Operating System).
-     *
-     * @param bool $fancy
-     */
-    public function mostUsedLanguage($fancy = false)
-    {
-        $max = collect($languages = $this->usedLanguages())->max();
-
-        foreach ($languages as $lang => $views) {
-            if ($views == $max) {
-                if ($fancy) {
-                    $countries = json_decode(file_get_contents(__DIR__.'/../countries.json'), true);
-                    foreach ($countries as $country) {
-                        if ($country['code'] == $lang) {
-                            return explode(' ', str_replace(';', '', $country['name']))[0];
-                        }
-                    }
-                }
-
-                return $lang;
-            }
-        }
-    }
-
+   
     /**
      * Adds a new view to the link.
+     * 
+     * @return void
      */
-    public function addView()
+    public function addClick()
     {
-        $view = View::create([
+        $browser = new Browser();
+        $os = new Os();
+        $device = new Device();
+        $language = new Language();
+
+        $view = LinkClick::create([
             'link_id'           => $this->id,
-            'language'          => Identify::lang()->getLanguage(),
-            'browser'           => Identify::browser()->getName(),
-            'browser_version'   => Identify::browser()->getVersion(),
-            'os'                => Identify::os()->getName(),
-            'os_version'        => Identify::os()->getVersion(),
+            'language'          => $language->getLanguage(),
+            'browser'           => $browser->getName(),
+            'browser_version'   => $browser->getVersion(),
+            'os'                => $os->getName(),
+            'os_version'        => $os->getVersion(),
             'ip'                => $this->getIP(),
         ]);
     }
 
     /**
      * Gets the real client IP.
+     *
+     * @return string
      */
     public function getIP()
     {

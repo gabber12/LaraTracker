@@ -1,36 +1,26 @@
 <?php
 
-/*
- * This file is part of consoletvs/links.
- *
- * (c) Erik Campobadal <soc@erik.cat>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace ConsoleTVs\Links;
+namespace Laratracker\Links;
 
 use Request;
-use ConsoleTVs\Links\Builder\Link;
+use Laratracker\Links\Builder\Link;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Facade;
 
-/**
- * This is the link facade class.
- *
- * @author Erik Campobadal <soc@erik.cat>
- */
 class Builder
 {
     /**
      * Return a new link instance from a url.
+     *  
+     * @param string $url        Fully qualified url
+     * @param array  $attributes ['shorten' => true, 'utm'=>[utm_parameters]]
      *
-     * @param string $url
+     * @return string 
      */
-    public static function url($url)
+    public static function url($url, $attributes=[])
     {
-        return new Link($url);
+        $linkService = new LinkService($url);
+        return $linkService->getShortUrl($attributes);
     }
 
     /**
@@ -38,20 +28,20 @@ class Builder
      *
      * @param string $url
      */
-    public static function route($name)
+    public static function route($name, $attributes)
     {
-        return new Link(route($name));
+        return new Link(route($name), $attributes);
     }
 
-    /**
-     * Create a new link from the current page url.
-     *
-     * @param string $url
-     */
-    public static function track($jquery = false)
-    {
-        $link = new Link(Request::url());
+    // /**
+    //  * Create a new link from the current page url.
+    //  *
+    //  * @param string $url
+    //  */
+    // public static function track($jquery = false)
+    // {
+    //     $link = new Link(Request::url());
 
-        return $link->ajax($jquery);
-    }
+    //     return $link->ajax($jquery);
+    // }
 }

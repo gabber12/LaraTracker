@@ -1,6 +1,6 @@
 <?php
 
-namespace LaraTracker\Links\Services;
+namespace Laratracker\Links\Services;
 
 use LaraTracker\Links\Models\Link;
 
@@ -19,11 +19,9 @@ class ShortLinkBuilder
      *
      * @param string $url
      */
-    public function __construct($fullUrl)
+    public function __construct($url)
     {
-        $this->fullUrl = $fullUrl;
-        $this->persisted = false;
-        $this->slug = null;
+        $this->url = $url;
     }
 
     /**
@@ -36,47 +34,16 @@ class ShortLinkBuilder
         return str_random($length);
     }
 
-    public function setSlug($slug) {
-        $this->slug = $slug;
-    }
 
-    private function getSlug($slug) {
-        return $this->slug;
-    }
-
-    private function persistLink($linkAttributes) {
-        if($this->persisted)
-            return $this->link;
-        
-        $this->link = Link::firstOrCreate($linkAttributes);
-        return $this->link;
-    }
-
-    /**
-     * Returns the link.
-     */
-    public function build()
+    public function shorten()
     {
-        $link = $this->persistLink([
-            'url'   => $this->fullUrl,
-            'slug'  => $this->slug,
-        ]);
-        return $link->shortered();
+        $result = parse_url($this->url);
+        $baseUrl = $result['scheme']."://".$result['host'].":".$result['port'];
+
+        $path = $result['path'];
+
+        return $baseUrl;
     }
-
-    // /**
-    //  * Returns the javascript code to send a and ajax request to the short url.
-    //  */
-    // public function ajax($jquery = false)
-    // {
-    //     $url = $this->link->shortered();
-
-    //     $code = $jquery ? "<script src='https://code.jquery.com/jquery-3.1.1.min.js' integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=' crossorigin='anonymous'></script>" : '';
-
-    //     $code .= '<script>';
-    //     $code .= "$.get('$url');";
-    //     $code .= '</script>';
-
-    //     return $code;
-    // }
+   
+  
 }
