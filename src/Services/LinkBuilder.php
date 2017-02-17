@@ -9,7 +9,7 @@ use LaraTracker\Links\Models\Link;
  *
  * @author Erik Campobadal <soc@erik.cat>
  */
-class ShortLinkBuilder
+class LinkBuilder
 {
     protected $link;
     protected $slug;
