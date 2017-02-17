@@ -21,8 +21,16 @@
         </testsuite>
     </testsuites>
     <filter>
+        
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
+            <directory suffix=".php">./src/Controllers</directory>
+            <directory suffix=".php">./src/Models</directory>
+            <directory suffix=".php">./src/Services</directory>
         </whitelist>
     </filter>
+    <logging>
+        
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+        
+    </logging>
 </phpunit>
