@@ -4,15 +4,10 @@ namespace Laratracker\Links\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-
 use Laratracker\Links\Models\Link;
-use Laratracker\Links\Models\View;
-
-
 
 class LinksController extends Controller
 {
-
     /**
      * Redirects the user to the link.
      *
@@ -22,7 +17,6 @@ class LinksController extends Controller
      */
     public function redirect(Request $request)
     {
-
         $url = $request->url(); // Not using fullUrl needs experimentation
 
         $link = $this->findOrAbort($url);
@@ -34,10 +28,10 @@ class LinksController extends Controller
 
     private function findOrAbort($url)
     {
-         if (! $link = Link::where('short_url', $url)->first()) {
+        if (! $link = Link::where('short_url', $url)->first()) {
             abort(404, 'Unable to find this link');
-         }
-         
-         return $link;
+        }
+
+        return $link;
     }
 }

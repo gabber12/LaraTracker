@@ -1,8 +1,11 @@
 <?php
+
 namespace Tests\Feature\Services;
 
-use Laratracker\Links\Services\LinkService;
+
 use Orchestra\Testbench\TestCase;
+use Laratracker\Links\Services\LinkService;
+
 
 class LinkServiceTest extends TestCase
 {
@@ -23,23 +26,27 @@ class LinkServiceTest extends TestCase
     {
         return ['Laratracker\Links\LinksServiceProvider'];
     }
-    
+
+
     protected function getPackageAliases($app)
-{
-    return [
-        'Tracker' => 'Laratracker\Links\Facades\Links'
+    {
+        return [
+        'Tracker' => 'Laratracker\Links\Facades\Links',
     ];
-}
+    }
+
     protected function getEnvironmentSetUp($app)
-{
-    // Setup default database to use sqlite :memory:
+    {
+        // Setup default database to use sqlite :memory:
     $app['config']->set('database.default', 'testbench');
-    $app['config']->set('database.connections.testbench', [
+        $app['config']->set('database.connections.testbench', [
+
         'driver'   => 'sqlite',
         'database' => ':memory:',
         'prefix'   => '',
     ]);
-}
+
+    }
      /**
      * @expectedException     InvalidArgumentException
      * 
@@ -58,3 +65,4 @@ class LinkServiceTest extends TestCase
         $this->assertNotNull('http://www.google.com', $longUrl, "Converted Url doesnot ");
     }
 }
+=
