@@ -25,7 +25,6 @@ class LinksController extends Controller
         return redirect($link->url);
     }
 
-
     private function findOrAbort($url)
     {
         if (! $link = Link::where('short_url', $url)->first()) {
