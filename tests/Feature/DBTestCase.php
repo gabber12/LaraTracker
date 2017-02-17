@@ -6,19 +6,18 @@ use Orchestra\Testbench\TestCase;
 
 class DBTestCase extends TestCase
 {
-
     protected function getPackageProviders($app)
     {
         return ['Laratracker\Links\LinksServiceProvider'];
     }
-    
+
     protected function getPackageAliases($app)
     {
         return [
-            'Tracker' => 'Laratracker\Links\Facades\Links'
+            'Tracker' => 'Laratracker\Links\Facades\Links',
         ];
     }
-    
+
     protected function getEnvironmentSetUp($app)
     {
         // Setup default database to use sqlite :memory:

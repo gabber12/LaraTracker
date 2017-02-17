@@ -96,6 +96,7 @@ class Link extends Model
     {
         return $query->where('identifier', $id);
     }
+
     /**
      * Gets the real client IP.
      *
