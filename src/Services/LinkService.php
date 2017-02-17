@@ -83,5 +83,24 @@ class LinkService
         return $shortenedUrl;
     }
 
+/**
+     * Returns a shortened url
+     *
+     * @return string
+    **/
+    public function getLongUrl($shortUrl)
+    {
+        if (!$this->validateUrl($shortUrl)) {
+            throw new \InvalidArgumentException("Invalid Url: ($shortUrl) supplied");
+        }
+
+        if ($link = Link::where('short_url', $shortUrl)->first()) {
+            return $link->short_url;
+        }
+        
+        return null;
+    }
+
+
 
 }

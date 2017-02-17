@@ -6,10 +6,16 @@ use Orchestra\Testbench\TestCase;
 
 class LinkServiceTest extends TestCase
 {
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->linkService = new LinkService('');
+    }
     public function testServiceCanBeConstructed()
     {
-        $linkService = new LinkService('');
-        $this->assertNotNull($linkService);
+       
+        $this->assertNotNull($this->linkService);
     }
 
     protected function getPackageProviders($app)
@@ -39,6 +45,13 @@ class LinkServiceTest extends TestCase
      */
     public function testCreateLinkForMalformedUrl()
     {
-        \Tracker::url('', []);
+        $this->linkService->getShortUrl('', []);
+    }
+
+    public function testCreateLinkPersistsLink() 
+    {
+        $shortUrl = $this->linkService->getShortUrl('http://www.google.com', []);
+        $longUrl = $this->linkService->getLongUrl($shortUrl);
+        $this->assertNotNull('http://www.google.com', $longUrl, "Converted Url doesnot ")
     }
 }
