@@ -104,8 +104,8 @@ class LinkService
         }
     }
 
-    public function getUrlsByIdentifier($shortUrl)
+    public function getLinksByIdentifier($shortUrl)
     {
-        return Link::byId($shortUrl)->first();
+        return Link::byId($shortUrl)->get();
     }
 }

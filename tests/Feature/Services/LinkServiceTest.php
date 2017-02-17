@@ -37,4 +37,12 @@ class LinkServiceTest extends DBTestCase
         $longUrl = $this->linkService->getLongUrl($shortUrl);
         $this->assertNotNull('http://www.google.com', $longUrl, "Converted Url doesnot match");
     }
+
+    public function testCreateLinkAndIdentifier()
+    {
+        $this->artisan('migrate', ['--database' => 'testbench']);
+
+        $shortUrl = $this->linkService->getShortUrl('http://www.google.com', ['identifier' => 'emi-link-1234']);
+        $this->assertEquals(count($this->linkService->getLinkByIdentifier('emi-link-1234')),1, "Could not fetch url by identifier");
+    }
 }

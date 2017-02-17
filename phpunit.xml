@@ -21,11 +21,11 @@
         </testsuite>
     </testsuites>
     <filter>
-        <blacklist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".blade.php">./src</directory>
-        </blacklist>
+        
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
+            <directory suffix=".php">./src/Controllers</directory>
+            <directory suffix=".php">./src/Models</directory>
+            <directory suffix=".php">./src/Services</directory>
         </whitelist>
     </filter>
     <logging>
