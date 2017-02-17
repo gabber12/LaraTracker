@@ -4,11 +4,6 @@ namespace Laratracker\Links\Services;
 
 use LaraTracker\Links\Models\Link;
 
-/**
- * This is the link class.
- *
- * @author Erik Campobadal <soc@erik.cat>
- */
 class LinkBuilder
 {
     protected $link;
@@ -17,7 +12,7 @@ class LinkBuilder
     /**
      * Create a new link instance.
      *
-     * @param string $url
+     * @param string $url Url to be transformed
      */
     public function __construct($url)
     {
@@ -26,14 +21,21 @@ class LinkBuilder
 
     /**
      * Return a random string.
-     * // TODO: May be better approach to.
-     * @param int $length
+     *
+     * @param int $length Length of random string to be generated
+     *
+     * @return string
      */
     public function randomString($length = 10)
     {
         return str_random($length);
     }
 
+    /**
+     * Build the shrotened url.
+     *
+     * @return string
+     */
     public function shorten()
     {
         $parsed_url = parse_url($this->url);

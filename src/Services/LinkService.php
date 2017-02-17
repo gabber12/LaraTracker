@@ -15,6 +15,13 @@ class LinkService
     {
     }
 
+    /**
+     * Returns if a uri is valid url.
+     *
+     * @param string $url Url to be validated
+     *
+     * @return bool
+     **/
     private function validateUrl($url)
     {
         return filter_var($url, FILTER_VALIDATE_URL);
@@ -22,6 +29,8 @@ class LinkService
 
     /**
      * Returns a canonicalized clean url.
+     *
+     * @param string $url Url to be cleaned
      *
      * @return string
      **/
@@ -37,12 +46,19 @@ class LinkService
      * @param string $url Url to be shortened
      *
      * @return LinkBuilder
-     **/
+     */
     private function getShortener($url)
     {
         return new LinkBuilder($url);
     }
 
+    /**
+     * Return the shortened Url.
+     *
+     * @param string $url Url to be shortened
+     *
+     * @return string
+     */
     private function shorten($url)
     {
         $shortener = $this->getShortener($url);
@@ -50,6 +66,15 @@ class LinkService
         return $shortener->shorten($url);
     }
 
+    /**
+     * Persist the link and return.
+     *
+     * @param string $url        Url to be shortened
+     * @param string $shortUrl   Transformed Short url
+     * @param array  $attributes [identifer]
+     *
+     * @return string
+     */
     private function persistLink($url, $shortUrl, $attributes)
     {
         $data = [
@@ -109,6 +134,13 @@ class LinkService
         }
     }
 
+    /**
+     * Returns Links with the identifer.
+     *
+     * @param string $id // Url identifier if set
+     *
+     * @return \App\Models\Link
+     */
     public function getLinksByIdentifier($id)
     {
         return Link::byId($id)->get();
