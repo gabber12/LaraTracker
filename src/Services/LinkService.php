@@ -103,4 +103,9 @@ class LinkService
             return $link->url;
         }
     }
+
+    public function getUrlsByIdentifier($shortUrl)
+    {
+        return Link::byId($shortUrl)->first();
+    }
 }

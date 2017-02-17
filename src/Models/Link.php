@@ -92,6 +92,10 @@ class Link extends Model
         ]);
     }
 
+    public function scoreById($query, $id)
+    {
+        return $query->where('identifier', $id);
+    }
     /**
      * Gets the real client IP.
      *
