@@ -21,6 +21,9 @@
         </testsuite>
     </testsuites>
     <filter>
+        <blacklist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".blade.php">./src</directory>
+        </blacklist>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
         </whitelist>
