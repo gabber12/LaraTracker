@@ -37,12 +37,18 @@ class ShortLinkBuilder
 
     public function shorten()
     {
-        $result = parse_url($this->url);
-        $baseUrl = $result['scheme']."://".$result['host'].":".$result['port'];
+        $parsed_url = parse_url($this->url);
+        
+        $scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : ''; 
+        $host     = isset($parsed_url['host']) ? $parsed_url['host'] : ''; 
+        $port     = isset($parsed_url['port']) ? ':' . $parsed_url['port'] : ''; 
+        $user     = isset($parsed_url['user']) ? $parsed_url['user'] : ''; 
+        $pass     = isset($parsed_url['pass']) ? ':' . $parsed_url['pass']  : ''; 
+        $pass     = ($user || $pass) ? "$pass@" : ''; 
 
         $path = $result['path'];
 
-        return $baseUrl;
+        return "$scheme$user$pass$host$port/".$this->randomString();
     }
    
   
