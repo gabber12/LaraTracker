@@ -24,13 +24,13 @@ composer require gabber12/Laratracker
 Add the following service provider to the array in: ```config/app.php```
 
 ```php
-Laratracker\Links\LinksServiceProvider::class,
+Laratracker\Links\TrackingServiceProvider::class,
 ```
 
 Add the following alias to the array in: ```config/app.php```
 
 ```php
-'Tracker' => Laratracker\Links\Facades\Links::class,
+'Tracker' => Laratracker\Links\Facades\Tracker::class,
 ```
 ### Publish the assets
 
