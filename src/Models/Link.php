@@ -81,15 +81,18 @@ class Link extends Model
         $device = new Device();
         $language = new Language();
 
-        $view = LinkClick::create([
-            'link_id'           => $this->id,
-            'language'          => $language->getLanguage(),
-            'browser'           => $browser->getName(),
-            'browser_version'   => $browser->getVersion(),
-            'os'                => $os->getName(),
-            'os_version'        => $os->getVersion(),
-            'ip'                => $this->getIP(),
-        ]);
+        $view = LinkClick::create(
+            [
+                'link_id'           => $this->id,
+                'language'          => $language->getLanguage(),
+                'browser'           => $browser->getName(),
+                'browser_version'   => $browser->getVersion(),
+                'os'                => $os->getName(),
+                'device'            => $device->getName(),
+                'os_version'        => $os->getVersion(),
+                'ip'                => $this->getIP(),
+            ]
+        );
     }
 
     public function scopeById($query, $id)
@@ -104,6 +107,8 @@ class Link extends Model
      */
     public function getIP()
     {
+        return "";
+        echo "in getIP";
         if (! empty($_SERVER['HTTP_CF_CONNECTING_IP'])) {   //check ip from cloudflare
           $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
         } elseif (! empty($_SERVER['HTTP_CLIENT_IP'])) {   //check ip from share internet
