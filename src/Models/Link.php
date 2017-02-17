@@ -18,7 +18,7 @@ class Link extends Model
      * @var array
      */
     protected $fillable = [
-        'url', 'short_url', 'url_identifier',
+        'url', 'short_url', 'identifier',
     ];
 
     /**
@@ -92,7 +92,7 @@ class Link extends Model
         ]);
     }
 
-    public function scoreById($query, $id)
+    public function scopeById($query, $id)
     {
         return $query->where('identifier', $id);
     }

@@ -50,15 +50,15 @@ class LinkService
         return $shortener->shorten($url);
     }
 
-    private function persistLink($url, $shortUrl)
+    private function persistLink($url, $shortUrl, $attributes)
     {
         $data = [
             'url' => $url,
             'short_url' => $shortUrl,
 
         ];
-        if (isset($attribures['identifier'])) {
-            $data['identifier'] = $attribures['identifier'];
+        if (isset($attributes['identifier'])) {
+            $data['identifier'] = $attributes['identifier'];
         }
 
         return Link::create($data);
@@ -104,8 +104,8 @@ class LinkService
         }
     }
 
-    public function getLinksByIdentifier($shortUrl)
+    public function getLinksByIdentifier($id)
     {
-        return Link::byId($shortUrl)->get();
+        return Link::byId($id)->get();
     }
 }

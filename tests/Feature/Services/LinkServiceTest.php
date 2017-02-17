@@ -41,6 +41,8 @@ class LinkServiceTest extends DBTestCase
         $this->artisan('migrate', ['--database' => 'testbench']);
 
         $shortUrl = $this->linkService->getShortUrl('http://www.google.com', ['identifier' => 'emi-link-1234']);
-        $this->assertEquals(count($this->linkService->getLinkByIdentifier('emi-link-1234')), 1, 'Could not fetch url by identifier');
+
+        $linksById = $this->linkService->getLinksByIdentifier('emi-link-1234');
+        $this->assertEquals(1, count($linksById), "Could not fetch url by identifier");
     }
 }
