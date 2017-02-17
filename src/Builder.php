@@ -4,23 +4,23 @@ namespace Laratracker\Links;
 
 use Request;
 use Laratracker\Links\Builder\Link;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Facade;
+use Laratracker\Links\Services\LinkService;
 
 class Builder
 {
     /**
      * Return a new link instance from a url.
-     *  
+     *
      * @param string $url        Fully qualified url
      * @param array  $attributes ['shorten' => true, 'utm'=>[utm_parameters]]
      *
-     * @return string 
+     * @return string
      */
-    public static function url($url, $attributes=[])
+    public static function url($url, $attributes = [])
     {
-        $linkService = new LinkService($url);
-        return $linkService->getShortUrl($attributes);
+        $linkService = new LinkService();
+
+        return $linkService->getShortUrl($url, $attributes);
     }
 
     /**

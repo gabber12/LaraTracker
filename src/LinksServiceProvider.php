@@ -4,7 +4,6 @@ namespace Laratracker\Links;
 
 use Illuminate\Support\ServiceProvider;
 
-
 class LinksServiceProvider extends ServiceProvider
 {
     /**
@@ -14,16 +13,13 @@ class LinksServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Routing\Router $router)
     {
-     
         $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
-     
 
         $this->publishes([
             __DIR__.'/Config/links.php' => config_path('links.php'),
         ], 'links_config');
 
         $router->middleware('links.middleware', config('links.middleware'));
-        
 
         $this->loadViewsFrom(__DIR__.'/Views', 'links');
 

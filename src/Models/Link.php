@@ -2,12 +2,11 @@
 
 namespace Laratracker\Links\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-use Sinergi\BrowserDetector\Browser;
 use Sinergi\BrowserDetector\Os;
 use Sinergi\BrowserDetector\Device;
+use Sinergi\BrowserDetector\Browser;
 use Sinergi\BrowserDetector\Language;
+use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
 {
@@ -19,7 +18,7 @@ class Link extends Model
      * @var array
      */
     protected $fillable = [
-        'url', 'short_url', 'url_identifier'
+        'url', 'short_url', 'url_identifier',
     ];
 
     /**
@@ -62,7 +61,7 @@ class Link extends Model
 
     /**
      * Returns the link total unique views number.
-     * 
+     *
      * @return int
      */
     public function totalUniqueViews()
@@ -70,10 +69,9 @@ class Link extends Model
         return $this->uniqueViews()->count();
     }
 
-   
     /**
      * Adds a new view to the link.
-     * 
+     *
      * @return void
      */
     public function addClick()

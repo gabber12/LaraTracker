@@ -26,7 +26,7 @@ class ShortLinkBuilder
 
     /**
      * Return a random string.
-     * // TODO: May be better approach to 
+     * // TODO: May be better approach to.
      * @param int $length
      */
     public function randomString($length = 10)
@@ -34,16 +34,19 @@ class ShortLinkBuilder
         return str_random($length);
     }
 
-
     public function shorten()
     {
-        $result = parse_url($this->url);
-        $baseUrl = $result['scheme']."://".$result['host'].":".$result['port'];
+        $parsed_url = parse_url($this->url);
 
-        $path = $result['path'];
+        $scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'].'://' : '';
+        $host = isset($parsed_url['host']) ? $parsed_url['host'] : '';
+        $port = isset($parsed_url['port']) ? ':'.$parsed_url['port'] : '';
+        $user = isset($parsed_url['user']) ? $parsed_url['user'] : '';
+        $pass = isset($parsed_url['pass']) ? ':'.$parsed_url['pass'] : '';
+        $pass = ($user || $pass) ? "$pass@" : '';
 
-        return $baseUrl;
+        $path = isset($parsed_url['path']) ? ':'.$parsed_url['path'] : '';
+
+        return "$scheme$user$pass$host$port/".$this->randomString();
     }
-   
-  
 }

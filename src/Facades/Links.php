@@ -1,12 +1,9 @@
 <?php
 
-
 namespace Laratracker\Links\Facades;
 
-use LaraTracker\Links\Builder;
+use Laratracker\Links\Builder;
 use Illuminate\Support\Facades\Facade;
-
-
 
 class Links extends Facade
 {
