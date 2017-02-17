@@ -43,6 +43,6 @@ class LinkServiceTest extends DBTestCase
         $shortUrl = $this->linkService->getShortUrl('http://www.google.com', ['identifier' => 'emi-link-1234']);
 
         $linksById = $this->linkService->getLinksByIdentifier('emi-link-1234');
-        $this->assertEquals(1, count($linksById), "Could not fetch url by identifier");
+        $this->assertEquals(1, count($linksById), 'Could not fetch url by identifier');
     }
 }

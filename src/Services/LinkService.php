@@ -93,7 +93,7 @@ class LinkService
 
     /**
      * Returns a shortened url.
-     * 
+     *
      * @param string $shortUrl Url to be expanded
      *
      * @return string
