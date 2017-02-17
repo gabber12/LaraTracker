@@ -50,15 +50,15 @@ class LinkService
         return $shortener->shorten($url);
     }
 
-    private function persistLink($url, $shortUrl)
+    private function persistLink($url, $shortUrl, $attributes)
     {
         $data = [
             'url' => $url,
-            'shortUrl' => $shortUrl,
+            'short_url' => $shortUrl,
 
         ];
-        if (isset($attribures['url_identifier'])) {
-            $data['url_identifier'] = $attribures['url_identifier'];
+        if (isset($attributes['identifier'])) {
+            $data['identifier'] = $attributes['identifier'];
         }
 
         return Link::create($data);
@@ -75,7 +75,7 @@ class LinkService
             throw new \InvalidArgumentException("Invalid Url: ($url) supplied");
         }
 
-        $cleanUrl = $this->getCleanUrl($url);
+        $cleanUrl = $this->cleanUrl($url);
 
         if ($link = Link::where('url', $url)->first()) {
             return $link->short_url;
@@ -86,5 +86,26 @@ class LinkService
         $link = $this->persistLink($url, $shortenedUrl, $attributes);
 
         return $shortenedUrl;
+    }
+
+    /**
+     * Returns a shortened url.
+     *
+     * @return string
+     **/
+    public function getLongUrl($shortUrl)
+    {
+        if (! $this->validateUrl($shortUrl)) {
+            throw new \InvalidArgumentException("Invalid Url: ($shortUrl) supplied");
+        }
+
+        if ($link = Link::where('short_url', $shortUrl)->first()) {
+            return $link->url;
+        }
+    }
+
+    public function getLinksByIdentifier($id)
+    {
+        return Link::byId($id)->get();
     }
 }
