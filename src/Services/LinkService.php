@@ -32,15 +32,15 @@ class LinkService
     }
 
     /**
-     * Returns a ShortenLinkBuilder.
+     * Returns a LinkBuilder.
      *
      * @param string $url Url to be shortened
      *
-     * @return string
+     * @return LinkBuilder
      **/
     private function getShortener($url)
     {
-        return new ShortLinkBuilder($url);
+        return new LinkBuilder($url);
     }
 
     private function shorten($url)
@@ -67,8 +67,11 @@ class LinkService
     /**
      * Returns a shortened url.
      *
+     * @param string $url        Url to be shortened
+     * @param array  $attributes [identifer]
+     *
      * @return string
-     **/
+     */
     public function getShortUrl($url, $attributes)
     {
         if (! $this->validateUrl($url)) {
@@ -90,6 +93,8 @@ class LinkService
 
     /**
      * Returns a shortened url.
+     *
+     * @param string $shortUrl Url to be expanded
      *
      * @return string
      **/
