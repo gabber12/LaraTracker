@@ -6,7 +6,8 @@
 [![StyleCI](https://styleci.io/repos/82211627/shield?branch=master)](https://styleci.io/repos/82211627)
 [![Build Status](https://scrutinizer-ci.com/g/gabber12/Laratracker/badges/build.png?b=master)](https://scrutinizer-ci.com/g/gabber12/Laratracker/build-status/master)
 [![Code Climate](https://codeclimate.com/github/gabber12/Laratracker/badges/gpa.svg)](https://codeclimate.com/github/gabber12/Laratracker)
-[![Code Climate](https://codeclimate.com/github/gabber12/Laratracker/badges/gpa.svg)](https://codeclimate.com/github/gabber12/Laratracker)
+[![Issue Count](https://codeclimate.com/github/gabber12/Laratracker/badges/issue_count.svg)](https://codeclimate.com/github/gabber12/Laratracker)
+
 ## Table Of Contents
 
 -   [Installation](#installation)
