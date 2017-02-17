@@ -16,7 +16,7 @@ class TrackingServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
 
         $this->publishes([
-            __DIR__.'/Config/tracker.php' => config_path('tracking.php'),
+            __DIR__.'/Config/tracker.php' => config_path('tracker.php'),
         ], 'tracker_config');
 
         $router->middleware('links.middleware', config('links.middleware'));
@@ -33,6 +33,6 @@ class TrackingServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/Config/tracker.php', 'tracker.php');
+        $this->mergeConfigFrom(__DIR__.'/Config/tracker.php', 'tracker');
     }
 }
