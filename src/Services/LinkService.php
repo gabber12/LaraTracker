@@ -100,7 +100,7 @@ class LinkService
         }
 
         if ($link = Link::where('short_url', $shortUrl)->first()) {
-            return $link->short_url;
+            return $link->url;
         }
     }
 }
