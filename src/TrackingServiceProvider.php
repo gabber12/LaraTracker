@@ -4,7 +4,7 @@ namespace Laratracker\Links;
 
 use Illuminate\Support\ServiceProvider;
 
-class LinksServiceProvider extends ServiceProvider
+class TrackingServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -16,12 +16,12 @@ class LinksServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
 
         $this->publishes([
-            __DIR__.'/Config/links.php' => config_path('links.php'),
-        ], 'links_config');
+            __DIR__.'/Config/tracker.php' => config_path('tracking.php'),
+        ], 'tracker_config');
 
         $router->middleware('links.middleware', config('links.middleware'));
 
-        $this->loadViewsFrom(__DIR__.'/Views', 'links');
+        $this->loadViewsFrom(__DIR__.'/Views', 'tracker');
 
         $this->loadMigrationsFrom(__DIR__.'/Migrations');
     }
@@ -33,6 +33,6 @@ class LinksServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/Config/links.php', 'links');
+        $this->mergeConfigFrom(__DIR__.'/Config/tracker.php', 'tracker.php');
     }
 }

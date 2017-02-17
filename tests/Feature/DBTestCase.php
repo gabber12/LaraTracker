@@ -8,7 +8,7 @@ class DBTestCase extends TestCase
 {
     protected function getPackageProviders($app)
     {
-        return ['Laratracker\Links\LinksServiceProvider'];
+        return ['Laratracker\Links\TrackingServiceProvider'];
     }
 
     protected function getPackageAliases($app)
