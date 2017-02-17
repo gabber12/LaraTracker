@@ -16,7 +16,6 @@ class LinkBuilderTest extends TestCase
     public function testBuilderCanShortenUrl()
     {
         $linkBuilder = new LinkBuilder('https://www.example.com');
-
         $this->assertNotNull((string) $linkBuilder->shorten());
     }
 }
