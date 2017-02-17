@@ -4,10 +4,6 @@ namespace Laratracker\Links;
 
 use Request;
 use Laratracker\Links\Builder\Link;
-
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Facade;
-
 use Laratracker\Links\Services\LinkService;
 
 class Builder
@@ -23,6 +19,7 @@ class Builder
     public static function url($url, $attributes = [])
     {
         $linkService = new LinkService();
+
         return $linkService->getShortUrl($url, $attributes);
     }
 

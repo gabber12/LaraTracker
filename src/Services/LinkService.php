@@ -55,10 +55,11 @@ class LinkService
         $data = [
             'url' => $url,
             'short_url' => $shortUrl,
-            
-        ];
-        if(isset($attribures['identifier'])) $data['identifier'] = $attribures['identifier'];
 
+        ];
+        if (isset($attribures['identifier'])) {
+            $data['identifier'] = $attribures['identifier'];
+        }
 
         return Link::create($data);
     }
@@ -70,7 +71,6 @@ class LinkService
      **/
     public function getShortUrl($url, $attributes)
     {
-
         if (! $this->validateUrl($url)) {
             throw new \InvalidArgumentException("Invalid Url: ($url) supplied");
         }
@@ -88,22 +88,19 @@ class LinkService
         return $shortenedUrl;
     }
 
-
-/**
-     * Returns a shortened url
+    /**
+     * Returns a shortened url.
      *
      * @return string
-    **/
+     **/
     public function getLongUrl($shortUrl)
     {
-        if (!$this->validateUrl($shortUrl)) {
+        if (! $this->validateUrl($shortUrl)) {
             throw new \InvalidArgumentException("Invalid Url: ($shortUrl) supplied");
         }
 
         if ($link = Link::where('short_url', $shortUrl)->first()) {
             return $link->short_url;
         }
-        
-        return null;
     }
 }

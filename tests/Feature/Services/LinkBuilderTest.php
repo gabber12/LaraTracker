@@ -18,6 +18,5 @@ class LinkBuilderTest extends TestCase
         $linkBuilder = new ShortLinkBuilder('https://www.example.com');
 
         $this->assertNotNull((string) $linkBuilder->shorten());
-
     }
 }
