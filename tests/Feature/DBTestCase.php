@@ -14,7 +14,7 @@ class DBTestCase extends TestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Tracker' => 'Laratracker\Links\Facades\Links',
+            'Tracker' => 'Laratracker\Links\Facades\Tracker',
         ];
     }
 

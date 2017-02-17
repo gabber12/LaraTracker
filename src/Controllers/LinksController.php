@@ -18,7 +18,6 @@ class LinksController extends Controller
     public function redirect(Request $request)
     {
         $url = $request->url(); // Not using fullUrl needs experimentation
-
         $link = $this->findOrAbort($url);
 
         $link->addClick();
