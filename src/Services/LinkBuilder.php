@@ -4,7 +4,6 @@ namespace Laratracker\Links\Services;
 
 use LaraTracker\Links\Models\Link;
 
-
 class LinkBuilder
 {
     protected $link;
@@ -33,7 +32,7 @@ class LinkBuilder
     }
 
     /**
-     * Build the shrotened url
+     * Build the shrotened url.
      *
      * @return string
      */

@@ -14,12 +14,13 @@ class LinkService
     public function __construct()
     {
     }
+
     /**
-     * Returns if a uri is valid url
+     * Returns if a uri is valid url.
      *
      * @param string $url Url to be validated
-     * 
-     * @return boolean
+     *
+     * @return bool
      **/
     private function validateUrl($url)
     {
@@ -52,8 +53,8 @@ class LinkService
     }
 
     /**
-     * Return the shortened Url
-     * 
+     * Return the shortened Url.
+     *
      * @param string $url Url to be shortened
      *
      * @return string
@@ -64,6 +65,7 @@ class LinkService
 
         return $shortener->shorten($url);
     }
+
     /**
      * Persist the link and return.
      *
@@ -134,10 +136,10 @@ class LinkService
 
     /**
      * Returns Links with the identifer.
-     * 
+     *
      * @param string $id // Url identifier if set
      *
-     * @return \App\Models\Link 
+     * @return \App\Models\Link
      */
     public function getLinksByIdentifier($id)
     {
