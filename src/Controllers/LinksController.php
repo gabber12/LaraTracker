@@ -8,6 +8,7 @@ use Laratracker\Links\Models\Link;
 
 class LinksController extends Controller
 {
+    
     /**
      * Redirects the user to the link.
      *

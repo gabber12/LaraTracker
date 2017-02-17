@@ -108,7 +108,7 @@ class Link extends Model
     public function getIP()
     {
         return "";
-        echo "in getIP";
+
         if (! empty($_SERVER['HTTP_CF_CONNECTING_IP'])) {   //check ip from cloudflare
           $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
         } elseif (! empty($_SERVER['HTTP_CLIENT_IP'])) {   //check ip from share internet
