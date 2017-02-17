@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Feature\Services;
 use PHPUnit\Framework\TestCase;
-use LTracker\Links\Services\LinkService;
+use Laratracker\Links\Services\LinkService;
 class LinkServiceTest extends TestCase
 {
     public function testServiceCanBeConstructed()
