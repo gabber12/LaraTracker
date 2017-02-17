@@ -52,10 +52,10 @@ class LinkService
     {
         $data = [
             'url' => $url,
-            'shortUrl' => $shortUrl,
+            'short_url' => $shortUrl,
             
         ];
-        if(isset($attribures['url_identifier'])) $data['url_identifier'] = $attribures['url_identifier'];
+        if(isset($attribures['identifier'])) $data['identifier'] = $attribures['identifier'];
 
         return Link::create($data);
     }
@@ -70,7 +70,7 @@ class LinkService
             throw new \InvalidArgumentException("Invalid Url: ($url) supplied");
         }
 
-        $cleanUrl = $this->getCleanUrl($url);
+        $cleanUrl = $this->cleanUrl($url);
 
         if ($link = Link::where('url', $url)->first()) {
             return $link->short_url;

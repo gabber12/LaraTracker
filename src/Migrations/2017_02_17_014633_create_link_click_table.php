@@ -21,6 +21,7 @@ class CreateLinkClickTable extends Migration
             $table->string('browser_version');
             $table->string('os');
             $table->string('os_version');
+            $table->string('device');
             $table->string('ip');
             $table->timestamps();
         });
@@ -33,5 +34,6 @@ class CreateLinkClickTable extends Migration
      */
     public function down()
     {
-        Sc
+        Schema::dropIfExists('link_clicks');
+    }
 }

@@ -10,6 +10,7 @@ class LinkServiceTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        
         $this->linkService = new LinkService('');
     }
     public function testServiceCanBeConstructed()
@@ -50,8 +51,10 @@ class LinkServiceTest extends TestCase
 
     public function testCreateLinkPersistsLink() 
     {
+            $this->artisan('migrate', ['--database' => 'testbench']);
+
         $shortUrl = $this->linkService->getShortUrl('http://www.google.com', []);
         $longUrl = $this->linkService->getLongUrl($shortUrl);
-        $this->assertNotNull('http://www.google.com', $longUrl, "Converted Url doesnot ")
+        $this->assertNotNull('http://www.google.com', $longUrl, "Converted Url doesnot ");
     }
 }
