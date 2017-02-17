@@ -9,8 +9,12 @@
     "require-dev": {
         "phpunit/phpunit": "^5.0",
         "orchestra/testbench": "~3.0",
+<<<<<<< 02ee27217864ae62b19dc59f45bdb01f843fc3a0
         "satooshi/php-coveralls": "dev-master",
         "laravel/browser-kit-testing": "^1.0"
+=======
+        "satooshi/php-coveralls": "dev-master"
+>>>>>>> Develop (#8)
     },
     "license": "MIT",
     "authors": [

@@ -1929,6 +1929,8 @@
             "time": "2017-02-08T22:32:37+00:00"
         },
         {
+=======
+>>>>>>> Develop (#8)
             "name": "myclabs/deep-copy",
             "version": "1.6.0",
             "source": {
