@@ -4,6 +4,7 @@ namespace Tests\Feature\Services;
 
 use PHPUnit\Framework\TestCase;
 use Laratracker\Links\Services\ShortLinkBuilder;
+
 class LinkBuilderTest extends TestCase
 {
     public function testBuilderCanBeConstructed()
@@ -15,8 +16,6 @@ class LinkBuilderTest extends TestCase
     public function testBuilderCanShortenUrl()
     {
         $linkBuilder = new ShortLinkBuilder('https://www.example.com');
-        $this->assertNotNull((string)$linkBuilder->shorten());
+        $this->assertNotNull((string) $linkBuilder->shorten());
     }
-
-    
 }
