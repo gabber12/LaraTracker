@@ -7,10 +7,16 @@ use Laratracker\Links\Services\LinkService;
 
 class LinkServiceTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->linkService = new LinkService('');
+    }
+
     public function testServiceCanBeConstructed()
     {
-        $linkService = new LinkService('');
-        $this->assertNotNull($linkService);
+        $this->assertNotNull($this->linkService);
     }
 
     protected function getPackageProviders($app)
@@ -30,6 +36,7 @@ class LinkServiceTest extends TestCase
         // Setup default database to use sqlite :memory:
     $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
+
         'driver'   => 'sqlite',
         'database' => ':memory:',
         'prefix'   => '',
@@ -41,6 +48,15 @@ class LinkServiceTest extends TestCase
      */
     public function testCreateLinkForMalformedUrl()
     {
-        \Tracker::url('', []);
+        $this->linkService->getShortUrl('', []);
+    }
+
+    public function testCreateLinkPersistsLink()
+    {
+        $this->artisan('migrate', ['--database' => 'testbench']);
+
+        $shortUrl = $this->linkService->getShortUrl('http://www.google.com', []);
+        $longUrl = $this->linkService->getLongUrl($shortUrl);
+        $this->assertNotNull('http://www.google.com', $longUrl, 'Converted Url doesnot ');
     }
 }
