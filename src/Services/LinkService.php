@@ -67,7 +67,7 @@ class LinkService
     public function getShortUrl($url, $attributes)
     {
         if (!$this->validateUrl($url)) {
-            throw new InvalidArgumentException("Invalid Url: ($url) supplied");
+            throw new \InvalidArgumentException("Invalid Url: ($url) supplied");
         }
 
         $cleanUrl = $this->getCleanUrl($url);
