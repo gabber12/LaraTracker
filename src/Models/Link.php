@@ -107,7 +107,7 @@ class Link extends Model
      */
     public function getIP()
     {
-        return "";
+        return '';
 
         if (! empty($_SERVER['HTTP_CF_CONNECTING_IP'])) {   //check ip from cloudflare
           $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];

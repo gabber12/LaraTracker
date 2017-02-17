@@ -9,4 +9,3 @@ Route::group(
         Route::get('/{slug}', 'LinksController@redirect')->name('redirect');
     }
 );
-
