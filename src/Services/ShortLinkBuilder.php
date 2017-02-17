@@ -46,7 +46,7 @@ class ShortLinkBuilder
         $pass     = isset($parsed_url['pass']) ? ':' . $parsed_url['pass']  : ''; 
         $pass     = ($user || $pass) ? "$pass@" : ''; 
 
-        $path = $result['path'];
+        $path = $parsed_url['path'];
 
         return "$scheme$user$pass$host$port/".$this->randomString();
     }
